@@ -13,6 +13,7 @@ dependencies = [
   "torch>=2.2.2; sys_platform == 'darwin' and platform_machine == 'arm64' and python_version <= '3.14'",
   "torch>=2.2.2; sys_platform == 'linux' and python_version <= '3.14'",
   "torch>=2.2.2; sys_platform == 'win32' and python_version <= '3.14'",
+  "torch>=2.9.0; python_version >= '3.14' and (sys_platform != 'darwin' or platform_machine != 'x86_64')",  # first release with cp314 wheels
   "tensorflow>=2.16.2; sys_platform == 'darwin' and platform_machine == 'x86_64' and python_version < '3.13'",
   "tensorflow>=2.18.0; sys_platform == 'darwin' and platform_machine == 'arm64' and python_version < '3.13'",
   "tensorflow-cpu>=2.18.0; sys_platform == 'linux' and platform_machine == 'x86_64' and python_version < '3.13'",
