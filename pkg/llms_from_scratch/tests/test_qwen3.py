@@ -329,10 +329,16 @@ def test_model_variants(ModelClass, qwen3_weights_path, generate_fn):
         context_size=QWEN_CONFIG_06_B["context_length"]
     )
     print("Encoded output text:", out)
+    # PyTorch 2.12 changed the random weight initialization, so the same seed
+    # yields a different (random) model and therefore different generated tokens
+    torch_version = tuple(int(x) for x in torch.__version__.split("+")[0].split(".")[:2])
+    if torch_version >= (2, 12):
+        generated = [69468, 119157, 67829, 57827, 132941]
+    else:
+        generated = [112120, 83942, 60483, 102652, 7414]
     expect = torch.tensor([
         [151644, 872, 198, 35127, 752, 264, 2805, 16800, 311,
-         3460, 4128,  4119, 13, 151645, 198, 112120, 83942, 60483,
-         102652, 7414]
+         3460, 4128,  4119, 13, 151645, 198] + generated
     ])
     assert torch.equal(expect, out)
 
